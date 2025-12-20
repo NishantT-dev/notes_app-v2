@@ -1,0 +1,16 @@
+import express from "express";
+import helmet from "helmet";
+import cors from "cors";
+import logger from "./middlewares/logger.js";
+import errorHandler from "./middlewares/errorHandler.js";
+import authRoutes from "./routes/authRoutes.js";
+import noteRoutes from "./routes/noteRoutes.js";
+const app=express();
+app.use(helmet());
+app.use(cors());
+app.use(express.json());
+app.use(logger);
+app.use("/api/auth", authRoutes);
+app.use("/api/notes",noteRoutes);
+app.use(errorHandler);
+export default app;
